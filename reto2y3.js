@@ -34,8 +34,9 @@ rl.question('Nombre: ', (name) => {
 
             const objetoJSON2 = JSON.stringify(objetoReto3);
 
-            fs.writeFile('objetoReto3.json', objetoJSON2, (err) => {})
+            fs.writeFile('objetoReto3.json', objetoJSON2, (err) => {
                 rl.close();
-            });
+            });                
         });
     });
+});
