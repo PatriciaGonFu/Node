@@ -16,14 +16,16 @@ let myBooks = [
     response.send(respuesta);
 }
 
-function getBookParams(request, response)
-{
-    let book = myBooks.find(book => book.id_book === id_book);
-    let id_book = request.params.id_book;
-    if (book != null)
-        response.send(book);
-    else
-        response.send({error: true, codigo: 200, mensaje: "El libro no existe"});
+function getBookParams(request, response) {
+    let id_book = parseInt(request.params.id_book);
+
+    let filteredBooks = myBooks.filter(book => book.id_book == id_book);
+
+    if (filteredBooks.length > 0) {
+        response.send(filteredBooks[0]);
+    } else {
+        response.send({ error: true, codigo: 200, mensaje: "El libro no existe" });
+    }
 }
 
 function getBooks(request, response)
@@ -60,30 +62,35 @@ function postBooks(request, response){
     response.send(respuesta);
 }
 
-function putBooks(request, response){
+function putBooks(request, response) {
     let respuesta;
+    let id_book = parseInt(request.params.id_book);
+
     let i = myBooks.findIndex(book => book.id_book === id_book);
-    if (i !== -1){
-        myBooks[i] = {
-        title: request.body.title1,
-        type: request.body.type1,
-        author: request.body.author1,
-        price: request.body.price1,
-        photo: request.photo.photo1,
-        id_book: request.body.id_book1
-        }
-    respuesta = {error: false, codigo: 200, mensaje: "Libro actualizado", resultado: myBooks[i]};
-    }
-    else {
-        respuesta = {error: true, codigo: 200, mensaje: "Libro no existe"};
-    }
-        
     
+    if (i !== -1) {
+        myBooks[i] = {
+            title: request.body.title,
+            type: request.body.type,
+            author: request.body.author,
+            price: request.body.price,
+            photo: request.body.photo,
+            id_book: request.body.id_book
+        };
+
+        respuesta = { error: false, codigo: 200, mensaje: "Libro actualizado", resultado: myBooks[i] };
+    } else {
+        respuesta = { error: true, codigo: 200, mensaje: "Libro no existe" };
+    }
+
     response.send(respuesta);
 }
 
+
 function deleteBooks (request, response){
     let respuesta;
+    let id_book = parseInt(request.params.id_book);
+    
     let i = myBooks.findIndex(book => book.id_book === id_book);
     if (i !== -1){
         myBooks.splice(i, 1);
@@ -95,4 +102,6 @@ function deleteBooks (request, response){
     response.send(respuesta);
 }
 
-module.exports = {getStart, getBooks, getBookParams, postBooks, putBooks, deleteBooks}
+
+
+module.exports = {getStart, getBookParams, getBooks, postBooks, putBooks, deleteBooks}

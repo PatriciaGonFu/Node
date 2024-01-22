@@ -44,12 +44,12 @@ function putBook(request, response){
     let respuesta;
     if (book != null && book.id_book == request.body.id_book)
     {
-        book.title = request.body.title1;
-        book.type = request.body.type1;
-        book.author = request.body.author1;
-        book.price = request.body.price1;
-        book.photo = request.body.photo1;
-        book.id_book = request.body.id_book1;
+        book.title = request.body.title;
+        book.type = request.body.type;
+        book.author = request.body.author;
+        book.price = request.body.price;
+        book.photo = request.body.photo;
+        book.id_book = request.body.id_book;
     
         respuesta = {error: false, codigo: 200, mensaje: "Libro actualizado", resultado: book};
     }
