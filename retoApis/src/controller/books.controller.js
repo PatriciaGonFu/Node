@@ -64,7 +64,7 @@ function postBooks(request, response){
 
 function putBooks(request, response) {
     let respuesta;
-    let id_book = parseInt(request.params.id_book);
+    let id_book = request.body.id_book;
 
     let i = myBooks.findIndex(book => book.id_book === id_book);
     
@@ -89,7 +89,7 @@ function putBooks(request, response) {
 
 function deleteBooks (request, response){
     let respuesta;
-    let id_book = parseInt(request.params.id_book);
+    let id_book = request.body.id_book;
     
     let i = myBooks.findIndex(book => book.id_book === id_book);
     if (i !== -1){
